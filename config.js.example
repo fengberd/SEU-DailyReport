@@ -1,0 +1,11 @@
+module.exports = {
+    browser: {
+        // Your browser configuration goes here
+        userDataDir: process.cwd() + '\\ChromeProfile',
+        executablePath: process.env.LOCALAPPDATA + '\\Google\\Chrome\\Application\\chrome.exe'
+    },
+    report_range: [36.5, 37.1],
+    username: 'Your username',
+    password: 'Your password',
+    push_api: false
+};
