@@ -4,6 +4,7 @@ module.exports = {
         userDataDir: process.cwd() + '\\ChromeProfile',
         executablePath: process.env.LOCALAPPDATA + '\\Google\\Chrome\\Application\\chrome.exe'
     },
+    delay_range: [60, 600], // Add some randomness, false to disable
     report_range: [36.5, 37.1],
     username: 'Your username',
     password: 'Your password',

@@ -25,6 +25,15 @@ async function pushStatus(message) {
     }
 }
 
+function sleep(seconds) {
+    console.info('Waiting for ' + seconds + 's...');
+    return new Promise(resolve => setTimeout(resolve, seconds * 1000));
+}
+
+function random(min, max) {
+    return Math.random() * (max - min) + min;
+}
+
 /**
  * @param {import('puppeteer-core').Page} page
  */
@@ -68,7 +77,7 @@ async function dailyReport(page) {
 
     console.debug('Waiting for temperature input.');
 
-    let temp = (Math.random() * (config.report_range[1] - config.report_range[0]) + config.report_range[0]).toFixed(1);
+    let temp = random(...config.report_range).toFixed(1);
     e = await page.waitForSelector('[data-name="DZ_JSDTCJTW"]');
     if (!e) {
         throw 'Unable to find temperature box!';
@@ -106,6 +115,10 @@ async function dailyReport(page) {
 var browser = null;
 
 (async () => {
+    if (config.delay_range) {
+        await sleep(parseInt(random(...config.delay_range)));
+    }
+
     browser = await puppeteer.launch(Object.assign({
         args: [
             // '--no-sandbox',
