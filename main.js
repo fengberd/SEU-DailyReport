@@ -115,7 +115,8 @@ async function dailyReport(page) {
 var browser = null;
 
 (async () => {
-    if (config.delay_range) {
+    var args = process.argv.slice(2);
+    if (!args.includes('nodelay') && config.delay_range) {
         await sleep(parseInt(random(...config.delay_range)));
     }
 
@@ -140,7 +141,7 @@ var browser = null;
     let temp = await dailyReport(page);
     if (temp !== true) {
         let date = new Date();
-        await pushStatus('✅ SEU Report Success\nDate: `' + date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate() + '`\nTemperature: `' + temp + '`');
+        await pushStatus('✅ SEU Report Success\nDate: `' + date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + '`\nTemperature: `' + temp + '`');
     }
 
     await page.close();
